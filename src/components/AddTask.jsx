@@ -17,6 +17,7 @@ const AddTask = ({ handleTaskAddtion }) => {
     // Pega conteúdo do inputData e passa para o handleTaskAddition
     const handleAddTaskClick = () => {
         handleTaskAddtion(inputData)
+        setInputData("")
     }
 
     return (
