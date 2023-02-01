@@ -19,6 +19,14 @@ const App = () => {
     },
   ]);
 
+  const handleTaskClick = (taskId) => {
+    const newTasks = tasks.map(task => {
+      if (task.id === taskId) return {...task, completed: !task.completed}
+      return task;
+    })
+    setTasks(newTasks)
+  }
+
   // Nova Task ao STATE
   const handleTaskAddtion = (taskTitle) => {
     const newTasks = [...tasks, {
@@ -37,7 +45,7 @@ const App = () => {
         {/* <!--Passado como props para receber o conteúdo do addTask--> */}
         <AddTask handleTaskAddtion={handleTaskAddtion}/>
         {/* Uso de props */}
-        <Tasks tasks={tasks}/> 
+        <Tasks tasks={tasks} handleTaskClick={handleTaskClick} /> 
       </div>
     </>
   );
