@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import {v4 as uuidv4} from "uuid";
+import { v4 as uuidv4 } from "uuid";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
 import "./App.css";
 
@@ -18,13 +19,13 @@ const App = () => {
     {
       id: "2",
       title: "Ler Livros",
-      completed: true,               
+      completed: true,
     },
   ]);
 
   const handleTaskClick = (taskId) => {
     const newTasks = tasks.map(task => {
-      if (task.id === taskId) return {...task, completed: !task.completed}
+      if (task.id === taskId) return { ...task, completed: !task.completed }
       return task;
     })
     setTasks(newTasks)
@@ -42,20 +43,26 @@ const App = () => {
   }
 
   const handleTaskDeletion = (taskId) => {
-    const newTasks = tasks.filter((task) => task.id !==  taskId );
+    const newTasks = tasks.filter((task) => task.id !== taskId);
     setTasks(newTasks)
   }
 
   return (
-    <>
+    <Router>
       <div className="container">
-        <Header/>
-        {/* <!--Passado como props para receber o conteúdo do addTask--> */}
-        <AddTask handleTaskAddtion={handleTaskAddtion}/>
-        {/* Uso de props */}
-        <Tasks tasks={tasks} handleTaskClick={handleTaskClick} handleTaskDeletion={handleTaskDeletion}/> 
+        <Header />
+        <Route path="/" exact render={() => (
+          <>
+            {/* <!--Passado como props para receber o conteúdo do addTask--> */}
+            <AddTask handleTaskAddtion={handleTaskAddtion} />
+            {/* Uso de props */}
+            <Tasks tasks={tasks}
+              handleTaskClick={handleTaskClick}
+              handleTaskDeletion={handleTaskDeletion} />
+          </>
+        )} />
       </div>
-    </>
+    </Router>
   );
 };
 
