@@ -1,9 +1,12 @@
 import React, { useState } from "react";
-
-import Tasks from "./components/Tasks";
-import "./App.css";
-import AddTask from "./components/AddTask";
 import {v4 as uuidv4} from "uuid";
+
+import "./App.css";
+
+// Components
+import Tasks from "./components/Tasks";
+import AddTask from "./components/AddTask";
+import Header from "./components/Header";
 
 const App = () => {
   const [tasks, setTasks] = useState([
@@ -46,6 +49,7 @@ const App = () => {
   return (
     <>
       <div className="container">
+        <Header/>
         {/* <!--Passado como props para receber o conteúdo do addTask--> */}
         <AddTask handleTaskAddtion={handleTaskAddtion}/>
         {/* Uso de props */}
